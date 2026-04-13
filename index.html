@@ -1,292 +1,603 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Letter from Matthew</title>
-    
-    <!-- Google Fonts: Courier Prime -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    
+    <title>grAttitude</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        // Dark palette
+                        "secondary-container": "#4a3900",
+                        "on-tertiary": "#5e5f63",
+                        "outline-variant": "#484848",
+                        "secondary": "#bd9a22",
+                        "surface-dim": "#0e0e0e",
+                        "on-secondary": "#291f00",
+                        "on-background": "#e7e5e4",
+                        "on-primary-container": "#d0d0d0",
+                        "background": "#0e0e0e",
+                        "outline": "#767575",
+                        "surface-container-highest": "#262626",
+                        "surface-container-low": "#131313",
+                        "surface-container": "#1a1919",
+                        "surface-container-high": "#202020",
+                        "on-secondary-container": "#e1bb43",
+                        "on-surface-variant": "#acabaa",
+                        "surface-container-lowest": "#000000",
+                        "on-surface": "#e7e5e4",
+                        "surface": "#0e0e0e",
+                        "on-primary": "#3f4041",
+                        "primary": "#c6c6c7",
+                        "surface-tint": "#c6c6c7",
+                        "primary-container": "#454747",
+                        "surface-bright": "#2c2c2c",
+                        "surface-variant": "#262626"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "serif": ["Cormorant Garamond", "serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
     <style>
-        /* === RESET & BASE === */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
-        
+
+        /* ---- Theme variables ---- */
+        :root {
+            --bg-body: #050505;
+            --bg-hero-from: #0a1a0a;
+            --bg-hero-via: #050505;
+            --bg-hero-glow: rgba(189, 154, 34, 0.06);
+            --hero-text: #e7e5e4;
+            --hero-sub: #acabaa;
+            --nav-bg: rgba(5, 5, 5, 0.6);
+            --overlay-bg: rgba(5, 5, 5, 0.94);
+            --overlay-text: #e7e5e4;
+            --overlay-sub: #acabaa;
+            --saved-bg: #4caf50;
+        }
+        html:not(.dark) {
+            --bg-body: #f7f6f3;
+            --bg-hero-from: #e8e4d9;
+            --bg-hero-via: #f7f6f3;
+            --bg-hero-glow: rgba(189, 154, 34, 0.08);
+            --hero-text: #222;
+            --hero-sub: #777;
+            --nav-bg: rgba(247, 246, 243, 0.7);
+            --overlay-bg: rgba(247, 246, 243, 0.96);
+            --overlay-text: #222;
+            --overlay-sub: #888;
+            --saved-bg: #4caf50;
+        }
+
         body {
-            /* Warm, aged paper background */
-            background-color: #f5f1e8;
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(0,0,0,0.005) 2px,
-                    rgba(0,0,0,0.005) 4px
-                );
-            font-family: 'Courier Prime', monospace;
-            color: #2c2416;
-            line-height: 1.9;
-            font-size: 18px;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding-top: 40px;
-            padding-bottom: 60px;
+            background-color: var(--bg-body);
+            transition: background-color 0.4s ease;
         }
-        
-        /* === MAIN LETTER CONTAINER === */
-        .letter-container {
-            /* Off-white paper color */
-            background-color: #fffef9;
-            max-width: 720px;
-            width: 100%;
-            padding: 60px 70px;
-            position: relative;
-            
-            /* Subtle paper texture effect */
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(255,248,230,0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(245,237,220,0.2) 0%, transparent 50%);
-            
-            /* Soft shadow for depth - like paper on a desk */
-            box-shadow: 
-                0 1px 3px rgba(0,0,0,0.08),
-                0 4px 12px rgba(0,0,0,0.06),
-                0 10px 30px rgba(0,0,0,0.04);
-            
-            /* Very slight rotation for organic feel */
-            transform: rotate(-0.3deg);
+
+        /* ---- Light mode overrides ---- */
+        html:not(.dark) body { color: #333; }
+        html:not(.dark) .nav-bar { background: var(--nav-bg); }
+        html:not(.dark) .nav-brand { color: #222; }
+        html:not(.dark) .nav-link-active { color: #8b6914; border-color: rgba(139,105,20,0.3); }
+        html:not(.dark) .nav-link { color: #777; }
+        html:not(.dark) .nav-link:hover { color: #333; }
+        html:not(.dark) .hero-label { color: #8b6914; }
+        html:not(.dark) .hero-title { color: var(--hero-text); }
+        html:not(.dark) .hero-author { color: var(--hero-sub); }
+        html:not(.dark) .section-title { color: #222; }
+        html:not(.dark) .section-subtitle { color: #888; }
+        html:not(.dark) .prompt-label { color: #8b6914; }
+        html:not(.dark) .journal-input {
+            background: #fff;
+            color: #333;
+            border: 1px solid #e5e2d9;
         }
-        
-        /* === HEADER SECTION === */
-        .letter-header {
-            margin-bottom: 30px;
+        html:not(.dark) .journal-input::placeholder { color: #bbb; }
+        html:not(.dark) .journal-input:focus { border-color: rgba(139,105,20,0.4); }
+        html:not(.dark) .affirmation-box {
+            background: #fffef5;
+            border-left-color: rgba(139,105,20,0.3);
         }
-        
-        /* Editable title */
-        .letter-title {
-            font-family: 'Courier Prime', monospace;
-            font-size: 32px;
-            font-weight: 700;
-            color: #1a1410;
-            margin-bottom: 8px;
-            line-height: 1.3;
-            letter-spacing: 0.5px;
-            border: none;
-            background: transparent;
-            width: 100%;
-            outline: none;
-            padding: 5px 0;
-            transition: background-color 0.2s;
+        html:not(.dark) .affirmation-box .aff-prefix { color: #bbb; }
+        html:not(.dark) .affirmation-box textarea { color: #444; }
+        html:not(.dark) .affirmation-box textarea::placeholder { color: #ccc; }
+        html:not(.dark) .evening-card { background: #fff; border-color: #e5e2d9; }
+        html:not(.dark) .evening-lock-overlay { background: rgba(247,246,243,0.88); }
+        html:not(.dark) .evening-lock-icon { color: #bbb; }
+        html:not(.dark) .evening-lock-title { color: #333; }
+        html:not(.dark) .evening-lock-desc { color: #999; }
+        html:not(.dark) .evening-lock-badge { background: #eee; color: #888; border-color: #ddd; }
+        html:not(.dark) .evening-input {
+            background: #f7f6f3;
+            color: #333;
+            border: 1px solid #e5e2d9;
         }
-        
-        .letter-title:focus {
-            background-color: rgba(255, 248, 220, 0.3);
+        html:not(.dark) .evening-input::placeholder { color: #bbb; }
+        html:not(.dark) .evening-input:focus { border-color: rgba(139,105,20,0.4); }
+        html:not(.dark) .export-btn { color: #888; }
+        html:not(.dark) .export-btn:hover { color: #333; }
+        html:not(.dark) .footer-bar { background: #f0efe9; border-color: #e5e2d9; }
+        html:not(.dark) .footer-brand { color: #aaa; }
+        html:not(.dark) .footer-link { color: #bbb; }
+        html:not(.dark) .footer-link:hover { color: #8b6914; }
+        html:not(.dark) .footer-copy { color: #ccc; }
+        html:not(.dark) .number-hint { color: rgba(0,0,0,0.25); }
+        html:not(.dark) .evening-number-hint { color: rgba(0,0,0,0.2); }
+        html:not(.dark) .evening-section-title { color: #333; }
+        html:not(.dark) .aff-sublabel { color: #bbb; }
+        html:not(.dark) .theme-toggle-btn { color: #888; }
+        html:not(.dark) .theme-toggle-btn:hover { color: #333; }
+        html:not(.dark) .date-label { color: #999; }
+
+        /* ---- Happiness score buttons ---- */
+        html:not(.dark) .happ-btn { background: #fff; border-color: #e5e2d9; color: #888; }
+        html:not(.dark) .happ-btn:hover { background: #faf9f6; color: #555; }
+        html:not(.dark) input:checked + .happ-btn { background: #fffdf5; border-color: rgba(139,105,20,0.4); color: #8b6914; }
+
+        /* ---- Textarea resets ---- */
+        textarea { overflow: hidden; resize: none; }
+
+        /* ---- Saved indicator ---- */
+        .saved-indicator {
+            position: fixed; bottom: 24px; right: 24px;
+            background: var(--saved-bg); color: white;
+            padding: 8px 18px; border-radius: 20px;
+            font-size: 14px; font-family: 'Inter', sans-serif;
+            opacity: 0; transition: opacity 0.3s ease;
+            pointer-events: none; z-index: 200;
         }
-        
-        /* Editable date */
-        .letter-date {
-            font-family: 'Courier Prime', monospace;
-            font-size: 16px;
-            color: #6b5d4f;
+        .saved-indicator.show { opacity: 1; }
+
+        /* ---- Completion overlay ---- */
+        .completion-overlay {
+            position: fixed; inset: 0;
+            background: var(--overlay-bg);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.4s ease; z-index: 300;
+        }
+        .completion-overlay.show { opacity: 1; pointer-events: auto; }
+        .completion-emoji { font-size: 72px; margin-bottom: 20px; animation: pop 0.4s ease; }
+        .completion-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 28px; color: var(--overlay-text); margin-bottom: 10px;
+        }
+        .completion-subtext {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px; color: var(--overlay-sub);
+        }
+        @keyframes pop {
+            0% { transform: scale(0.5); }
+            70% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        /* ---- Evening lock ---- */
+        .evening-lock-overlay { transition: opacity 0.6s ease; }
+        .evening-lock-overlay.unlocked { opacity: 0; pointer-events: none; }
+
+        /* ---- Focus resets ---- */
+        input[type="text"]:focus, textarea:focus { outline: none; }
+
+        /* ---- Countdown pulse ---- */
+        @keyframes subtle-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .countdown-pulse { animation: subtle-pulse 3s ease-in-out infinite; }
+
+        /* ---- Hero gradient (no image dependency) ---- */
+        .hero-gradient {
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 80%, var(--bg-hero-glow), transparent),
+                radial-gradient(ellipse 60% 50% at 20% 60%, rgba(34, 80, 34, 0.08), transparent),
+                radial-gradient(ellipse 60% 50% at 80% 60%, rgba(34, 80, 34, 0.05), transparent),
+                linear-gradient(to bottom, var(--bg-hero-from) 0%, var(--bg-hero-via) 100%);
+            transition: background 0.6s ease;
+        }
+
+        /* ---- Obsidian logo SVG ---- */
+        .obsidian-logo {
+            width: 18px; height: 18px;
+            flex-shrink: 0;
+        }
+
+        /* ---- Power Questions details reset ---- */
+        .pq-item > summary { list-style: none; }
+        .pq-item > summary::-webkit-details-marker { display: none; }
+
+        /* ---- Block wrapper spacing ---- */
+        .block-wrapper + .block-wrapper { margin-top: 3rem; }
+        @media (min-width: 768px) {
+            .block-wrapper + .block-wrapper { margin-top: 3.5rem; }
+        }
+
+        /* ---- Empty-morning state ---- */
+        .empty-stack {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #666;
+            font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            margin-bottom: 40px;
-            display: block;
-            border: none;
-            background: transparent;
-            width: 100%;
-            outline: none;
-            padding: 3px 0;
-            transition: background-color 0.2s;
+            font-size: 1.25rem;
         }
-        
-        .letter-date:focus {
-            background-color: rgba(255, 248, 220, 0.3);
-        }
-        
-        /* === BODY CONTENT === */
-        .letter-body {
-            margin-bottom: 50px;
-            min-height: 300px;
-            border: none;
-            background: transparent;
-            font-family: 'Courier Prime', monospace;
-            font-size: 18px;
-            color: #2c2416;
-            line-height: 1.9;
-            width: 100%;
-            outline: none;
-            resize: vertical;
-            padding: 10px 0;
-            transition: background-color 0.2s;
-        }
-        
-        .letter-body:focus {
-            background-color: rgba(255, 248, 220, 0.2);
-        }
-        
-        /* === SIGNATURE SECTION === */
-        .letter-signature {
-            margin-top: 50px;
-            text-align: left;
-            font-family: 'Courier Prime', monospace;
-            font-size: 24px;
-            color: #2c2416;
-            font-weight: 400;
-            padding-left: 20px;
-            position: relative;
-        }
-        
-        .letter-signature::before {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 2px;
-            background-color: #d4c4a8;
-            margin-bottom: 15px;
-        }
-        
-        .letter-signature input {
-            font-family: 'Courier Prime', monospace;
-            font-size: 24px;
-            color: #2c2416;
-            font-weight: 400;
-            border: none;
-            background: transparent;
-            outline: none;
-            width: 100%;
-            padding: 5px 0;
-            transition: background-color 0.2s;
-        }
-        
-        .letter-signature input:focus {
-            background-color: rgba(255, 248, 220, 0.3);
-        }
-        
-        /* === RESPONSIVE DESIGN === */
-        @media (max-width: 768px) {
-            body {
-                padding: 15px;
-                padding-top: 30px;
-                padding-bottom: 40px;
-            }
-            
-            .letter-container {
-                padding: 40px 35px;
-                transform: rotate(-0.2deg);
-            }
-            
-            .letter-title {
-                font-size: 28px;
-            }
-            
-            .letter-date {
-                font-size: 15px;
-                margin-bottom: 30px;
-            }
-            
-            .letter-body {
-                font-size: 17px;
-                margin-bottom: 40px;
-            }
-            
-            .letter-signature input {
-                font-size: 22px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            body {
-                font-size: 16px;
-                line-height: 1.8;
-            }
-            
-            .letter-container {
-                padding: 30px 25px;
-            }
-            
-            .letter-title {
-                font-size: 24px;
-            }
-            
-            .letter-body {
-                font-size: 16px;
-                line-height: 1.8;
-            }
-            
-            .letter-signature input {
-                font-size: 20px;
-            }
-        }
-        
-        /* === SUBTLE ANIMATIONS === */
-        .letter-container {
-            animation: fadeIn 0.8s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px) rotate(-0.3deg);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) rotate(-0.3deg);
-            }
-        }
-        
-        /* === PLACEHOLDER STYLING === */
-        .letter-title::placeholder,
-        .letter-date::placeholder,
-        .letter-body::placeholder,
-        .letter-signature input::placeholder {
-            color: #a89e8f;
-            opacity: 0.6;
-        }
+        html:not(.dark) .empty-stack { color: #999; }
     </style>
 </head>
-<body>
-    
-    <!-- Main Letter Container -->
-    <div class="letter-container">
-        
-        <!-- Header: Title and Date -->
-        <div class="letter-header">
-            <input 
-                type="text" 
-                class="letter-title" 
-                value="Iterations"
-                placeholder="Your Newsletter Title..."
-            >
-            <input 
-                type="text" 
-                class="letter-date" 
-                value="January 26th, 2025"
-                placeholder="Date..."
-            >
+<body class="font-body text-on-surface">
+
+    <!-- Top Nav Bar -->
+    <nav class="nav-bar fixed top-0 w-full z-50 bg-neutral-950/60 backdrop-blur-3xl">
+        <div class="flex justify-between items-center h-16 md:h-20 px-6 md:px-12 max-w-screen-2xl mx-auto">
+            <a href="index.html" class="nav-brand"><img src="assets/logo-wordmark-dark.svg" alt="grATTitude" class="h-6 md:h-8 dark:hidden"><img src="assets/logo-wordmark.svg" alt="grATTitude" class="h-6 md:h-8 hidden dark:block"></a>
+            <!-- Desktop nav links -->
+            <div class="hidden md:flex items-center space-x-10 font-headline text-sm tracking-tight uppercase">
+                <a class="nav-link-active text-amber-400 font-semibold border-b border-amber-400/30 pb-1" href="index.html">Journal</a>
+                <a class="nav-link text-stone-400 hover:text-stone-200 transition-colors" href="insights.html">Insights</a>
+                <a class="nav-link text-stone-400 hover:text-stone-200 transition-colors" href="library.html">Library</a>
+                <a class="nav-link text-stone-400 hover:text-stone-200 transition-colors" href="settings.html">Settings</a>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span class="date-label hidden sm:block font-body text-xs text-on-surface-variant" id="currentDate"></span>
+                <!-- Light / Dark toggle -->
+                <button id="themeToggle" class="theme-toggle-btn text-on-surface-variant hover:text-on-surface transition-colors p-1" aria-label="Toggle light/dark mode">
+                    <span class="material-symbols-outlined text-xl" id="themeIcon">dark_mode</span>
+                </button>
+                <!-- Mobile hamburger -->
+                <button id="mobileMenuBtn" class="md:hidden text-on-surface-variant hover:text-on-surface transition-colors p-1" aria-label="Open menu">
+                    <span class="material-symbols-outlined text-2xl" id="menuIcon">menu</span>
+                </button>
+            </div>
         </div>
-        
-        <!-- Main Body Content (Editable Textarea) -->
-        <textarea class="letter-body" placeholder="Start writing your letter here...">.</textarea>
-        
-        <!-- Signature -->
-        <div class="letter-signature">
-            <input 
-                type="text" 
-                value="— Matthew"
-                placeholder="— Your Name"
-            >
+        <!-- Mobile dropdown menu -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-white/5 px-6 pb-4 pt-2 font-headline text-sm tracking-tight uppercase space-y-3">
+            <a class="block text-amber-400 font-semibold py-2" href="index.html">Journal</a>
+            <a class="block text-stone-400 hover:text-stone-200 transition-colors py-2" href="insights.html">Insights</a>
+            <a class="block text-stone-400 hover:text-stone-200 transition-colors py-2" href="library.html">Library</a>
+            <a class="block text-stone-400 hover:text-stone-200 transition-colors py-2" href="settings.html">Settings</a>
         </div>
-        
+    </nav>
+
+    <main class="pt-20">
+
+        <!-- Hero Section -->
+        <section class="relative flex items-center justify-center overflow-hidden" style="min-height: 520px; padding: 80px 24px 60px;">
+            <div class="absolute inset-0 z-0">
+                <img id="heroArtwork" src="" alt="" class="w-full h-full object-cover" style="opacity: 0; transition: opacity 0.8s ease;">
+                <div class="absolute inset-0" style="background: linear-gradient(to bottom, transparent 0%, var(--bg-body) 100%);"></div>
+            </div>
+            <div class="relative z-10 text-center max-w-3xl mx-auto">
+                <span class="hero-label font-headline text-secondary tracking-[0.3em] uppercase text-xs mb-6 block">Daily Resonance</span>
+                <h1 class="hero-title font-headline text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-none mb-6" style="color: var(--hero-text);" id="quoteText"></h1>
+                <p class="hero-author font-body text-lg md:text-xl font-light italic max-w-2xl mx-auto" style="color: var(--hero-sub);" id="quoteAuthor"></p>
+                <div id="artworkCredit" class="mt-8 font-body text-xs tracking-wide max-w-xl mx-auto" style="color: var(--hero-sub); opacity: 0.5;">
+                    <span id="artworkTitle" class="italic"></span>
+                    <span id="artworkMeta"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journal Content — Centered single column -->
+        <section class="max-w-3xl mx-auto px-6 py-16 md:py-24 space-y-20">
+
+            <!-- Morning Reflections -->
+            <div id="morningSection">
+                <div class="mb-10 text-center">
+                    <h2 class="section-title font-headline text-3xl md:text-4xl font-bold tracking-tight mb-2 text-on-surface">Morning Reflections</h2>
+                    <p class="section-subtitle text-on-surface-variant text-lg">Cultivating awareness before the world awakens.</p>
+                </div>
+
+                <!-- Dynamically rendered morning blocks -->
+                <div id="morningBlocks"></div>
+
+                <!-- Export button -->
+                <div class="mt-14 flex justify-center">
+                    <button id="downloadBtn" class="export-btn flex items-center gap-3 text-on-surface-variant hover:text-on-surface transition-colors font-headline text-xs uppercase tracking-widest py-3 px-6 rounded-full border border-white/10 hover:border-white/20">
+                        <!-- Obsidian purple crystal logo -->
+                        <svg class="obsidian-logo" viewBox="0 0 65 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.48 0.98C22.44 3.3 23.54 6.22 23.6 9.26C23.68 12.96 22.46 16.5 21.56 20.12C20.2 25.52 19.72 31.56 22.62 36.5C24.88 40.36 28.68 43.08 32.9 44.04C30.16 39.12 29.28 33.32 30.46 27.86C31.36 23.66 33.52 19.48 37.28 17.5C35.7 23.04 37.12 29.14 40.82 33.64C43.46 36.82 47.08 39.12 49.84 42.2C53.24 46.02 55.44 50.88 55.92 56.04C56.58 63.14 54 70.52 49.06 75.7C52.42 70.28 53.18 63.32 50.84 57.4C49.4 53.74 46.72 50.66 43.76 48C40.12 44.7 36.04 41.8 32.98 37.88C29.42 33.3 27.74 27.14 29.02 21.52C25.7 28.22 25.38 36.24 28.26 43.14C30.2 47.82 33.64 51.8 36.34 56.14C38.64 59.84 40.38 64 40.44 68.36C40.52 73.16 38.48 77.82 35.36 81.28C32.16 84.82 27.72 87.24 23.02 87.68C26.22 85.54 28.3 82.02 28.62 78.26C28.96 74.28 27.22 70.34 24.46 67.56C21.32 64.38 17 62.68 13.22 60.18C8.58 57.12 4.58 52.76 2.66 47.46C0.2 40.68 1.14 32.84 4.92 26.7C8.26 21.28 13.42 17.12 18.82 13.78C18.42 11.5 17.54 9.16 18.4 6.92C18.88 5.66 19.56 4.48 20.48 0.98Z" fill="#a855f7"/>
+                        </svg>
+                        Export to Obsidian (.md)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Evening Review -->
+            <div class="evening-card bg-surface-container-low rounded-xl p-8 md:p-10 border border-white/5 relative overflow-hidden" id="eveningSection">
+
+                <!-- Lock Overlay -->
+                <div class="evening-lock-overlay absolute inset-0 bg-neutral-950/80 backdrop-blur-sm z-20 flex flex-col items-center justify-center text-center p-8" id="eveningLockOverlay">
+                    <span class="evening-lock-icon material-symbols-outlined text-6xl text-on-tertiary mb-6" style="font-variation-settings: 'FILL' 0;">nights_stay</span>
+                    <h3 class="evening-lock-title font-headline text-2xl font-bold mb-3 text-on-surface">Evening Review</h3>
+                    <p class="evening-lock-desc text-on-tertiary text-sm max-w-[240px] mx-auto leading-relaxed">The evening sanctuary opens at 5:00 PM to reflect on your day.</p>
+                    <div class="evening-lock-badge mt-8 px-4 py-2 bg-surface-container-highest rounded-full text-[10px] font-bold uppercase tracking-widest text-on-surface-variant border border-white/5 countdown-pulse" id="eveningCountdown">
+                        Locked
+                    </div>
+                </div>
+
+                <!-- Evening Content -->
+                <div class="space-y-8" id="eveningContent">
+                    <div class="text-center mb-2">
+                        <h3 class="evening-section-title font-headline text-2xl font-bold text-on-surface mb-1">Evening Review</h3>
+                    </div>
+                    <div id="eveningBlocks"></div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-bar w-full py-10 md:py-14 mt-12 bg-neutral-950 border-t border-white/5">
+        <div class="flex flex-col md:flex-row justify-between items-center px-6 md:px-12 max-w-screen-2xl mx-auto gap-5">
+            <div class="footer-brand"><img src="assets/logo-wordmark-dark.svg" alt="grATTitude" class="h-5 opacity-50 dark:hidden"><img src="assets/logo-wordmark.svg" alt="grATTitude" class="h-5 opacity-50 hidden dark:block"></div>
+            <div class="flex flex-wrap justify-center gap-6 md:gap-8">
+                <a class="footer-link font-body text-xs tracking-widest uppercase text-stone-600 hover:text-amber-200 transition-colors" href="#">Privacy Policy</a>
+                <a class="footer-link font-body text-xs tracking-widest uppercase text-stone-600 hover:text-amber-200 transition-colors" href="#">Terms of Service</a>
+                <a class="footer-link font-body text-xs tracking-widest uppercase text-stone-600 hover:text-amber-200 transition-colors" href="#">Contact</a>
+            </div>
+            <div class="footer-copy font-body text-xs tracking-widest uppercase text-stone-500">
+                &copy; 2025 grAttitude
+            </div>
+        </div>
+    </footer>
+
+    <!-- Saved Indicator -->
+    <div class="saved-indicator" id="savedIndicator">Saved</div>
+
+    <!-- Completion Overlay -->
+    <div class="completion-overlay" id="completionOverlay">
+        <div class="completion-emoji">&#10024;</div>
+        <div class="completion-text" id="completionText"></div>
+        <div class="completion-subtext">Another day lived with intention.</div>
     </div>
-    
+
+    <script src="quotes.js"></script>
+    <script src="artworks.js"></script>
+    <script src="journal-blocks.js"></script>
+    <script>
+        // ===========================================
+        // REDIRECT NEW USERS TO ONBOARDING
+        // ===========================================
+        if (JournalBlocks.isNewUser()) {
+            window.location.replace('onboarding.html');
+        }
+
+        // Ensure existing users without a practice config get the default stack.
+        if (!JournalBlocks.getPractice()) {
+            JournalBlocks.savePractice(JournalBlocks.getDefaultPractice());
+        }
+
+        const TODAY_KEY = JournalBlocks.todayKey();
+
+        const formatDate = (str) => new Date(str + 'T00:00:00Z').toLocaleDateString('en-US', {
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+        });
+
+        // ===========================================
+        // THEME TOGGLE
+        // ===========================================
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        function applyTheme(dark) {
+            if (dark) {
+                document.documentElement.classList.add('dark');
+                themeIcon.textContent = 'dark_mode';
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeIcon.textContent = 'light_mode';
+            }
+            localStorage.setItem('journal_theme', dark ? 'dark' : 'light');
+        }
+
+        const savedTheme = localStorage.getItem('journal_theme');
+        applyTheme(savedTheme !== 'light');
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.contains('dark');
+            applyTheme(!isDark);
+        });
+
+        // ===========================================
+        // SAVED INDICATOR
+        // ===========================================
+        let saveTimer;
+        const savedIndicator = document.getElementById('savedIndicator');
+
+        function flashSaved() {
+            savedIndicator.classList.add('show');
+            clearTimeout(saveTimer);
+            saveTimer = setTimeout(() => savedIndicator.classList.remove('show'), 1500);
+        }
+
+        // ===========================================
+        // RENDER BLOCKS FROM ACTIVE PRACTICE
+        // ===========================================
+        const practice = JournalBlocks.getPractice();
+        const morningContainer = document.getElementById('morningBlocks');
+        const eveningContainer = document.getElementById('eveningBlocks');
+        const eveningSection = document.getElementById('eveningSection');
+
+        JournalBlocks.renderPhase(morningContainer, practice.morning, TODAY_KEY);
+        JournalBlocks.hydrateAndWire(morningContainer, TODAY_KEY, flashSaved);
+
+        if (practice.evening.length === 0) {
+            // User opted out of evenings \u2014 hide the section entirely.
+            eveningSection.style.display = 'none';
+        } else {
+            JournalBlocks.renderPhase(eveningContainer, practice.evening, TODAY_KEY);
+            JournalBlocks.hydrateAndWire(eveningContainer, TODAY_KEY, flashSaved);
+        }
+
+        // ===========================================
+        // EVENING LOCK (only if evening section visible)
+        // ===========================================
+        if (practice.evening.length > 0) {
+            const hour = new Date().getHours();
+            const isEvening = hour >= 17;
+            const lockOverlay = document.getElementById('eveningLockOverlay');
+            const eveningContent = document.getElementById('eveningContent');
+
+            function updateEveningLock() {
+                const now = new Date();
+                const h = now.getHours();
+                const m = now.getMinutes();
+                if (h >= 17) {
+                    lockOverlay.classList.add('unlocked');
+                    eveningContent.classList.remove('opacity-20', 'select-none', 'pointer-events-none');
+                    return;
+                }
+                const totalMinLeft = (17 - h - 1) * 60 + (60 - m);
+                const hoursLeft = Math.floor(totalMinLeft / 60);
+                const minsLeft = totalMinLeft % 60;
+                document.getElementById('eveningCountdown').textContent =
+                    `Locked \u2022 Opens in ${hoursLeft}h ${minsLeft}m`;
+                setTimeout(updateEveningLock, 60000);
+            }
+
+            if (isEvening) {
+                lockOverlay.classList.add('unlocked');
+            } else {
+                eveningContent.classList.add('opacity-20', 'select-none', 'pointer-events-none');
+                updateEveningLock();
+            }
+        }
+
+        // ===========================================
+        // QUOTES
+        // ===========================================
+        function loadDailyQuote() {
+            const cached = localStorage.getItem(`quote_${TODAY_KEY}`);
+            const quote = cached ? JSON.parse(cached) : QUOTES[Math.floor(Math.random() * QUOTES.length)];
+            localStorage.setItem(`quote_${TODAY_KEY}`, JSON.stringify(quote));
+            document.getElementById('quoteText').textContent = quote.text;
+            document.getElementById('quoteAuthor').textContent = `\u2014 ${quote.author}`;
+        }
+
+        // ===========================================
+        // DAILY ARTWORK
+        // ===========================================
+        function loadDailyArtwork() {
+            if (typeof ARTWORKS === 'undefined' || !ARTWORKS.length) return;
+
+            const cacheKey = `artwork_${TODAY_KEY}`;
+            let artwork;
+            const cached = localStorage.getItem(cacheKey);
+
+            if (cached) {
+                artwork = JSON.parse(cached);
+            } else {
+                // Deterministic: same artwork for every user on the same day
+                const now = new Date();
+                const startOfYear = new Date(now.getFullYear(), 0, 0);
+                const dayOfYear = Math.floor((now - startOfYear) / 86400000);
+                const index = dayOfYear % ARTWORKS.length;
+                artwork = ARTWORKS[index];
+                localStorage.setItem(cacheKey, JSON.stringify(artwork));
+            }
+
+            // IIIF image URL (1686px wide for hero backgrounds)
+            const imageUrl = `https://www.artic.edu/iiif/2/${artwork.image_id}/full/1686,/0/default.jpg`;
+
+            const heroImg = document.getElementById('heroArtwork');
+            heroImg.alt = artwork.alt || artwork.title;
+            heroImg.onload = () => { heroImg.style.opacity = '1'; };
+            heroImg.onerror = () => {
+                // Fallback to smaller size if large fails
+                heroImg.src = `https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`;
+            };
+            heroImg.src = imageUrl;
+
+            // Set artwork credit
+            const titleEl = document.getElementById('artworkTitle');
+            const metaEl = document.getElementById('artworkMeta');
+            if (titleEl) titleEl.textContent = artwork.title;
+            if (metaEl) {
+                let meta = '';
+                if (artwork.artist) meta += ` \u2014 ${artwork.artist}`;
+                if (artwork.date) meta += `, ${artwork.date}`;
+                metaEl.textContent = meta;
+            }
+        }
+
+        // ===========================================
+        // EXPORT — Markdown (dynamic from blocks)
+        // ===========================================
+        const COMPLETION_MESSAGES = [
+            "Day documented. Well done.",
+            "You showed up. That\u2019s everything.",
+            "This day is now yours to keep.",
+            "Reflection is a form of respect \u2014 for yourself.",
+            "One more day lived with intention.",
+            "You took five minutes for yourself. Good.",
+        ];
+
+        function downloadMarkdown() {
+            const md = JournalBlocks.exportMarkdown(TODAY_KEY);
+            const blob = new Blob([md], { type: 'text/markdown' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `Journal-${TODAY_KEY}.md`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            const btn = document.getElementById('downloadBtn');
+            const overlay = document.getElementById('completionOverlay');
+            const msg = COMPLETION_MESSAGES[Math.floor(Math.random() * COMPLETION_MESSAGES.length)];
+            document.getElementById('completionText').textContent = msg;
+            btn.classList.add('opacity-50', 'pointer-events-none');
+            overlay.classList.add('show');
+            setTimeout(() => {
+                overlay.classList.remove('show');
+                btn.classList.remove('opacity-50', 'pointer-events-none');
+            }, 2200);
+        }
+
+        // ===========================================
+        // INIT
+        // ===========================================
+        document.getElementById('currentDate').textContent = formatDate(TODAY_KEY);
+        document.getElementById('downloadBtn').addEventListener('click', downloadMarkdown);
+        loadDailyQuote();
+        loadDailyArtwork();
+
+        document.getElementById('completionOverlay').addEventListener('click', function () {
+            this.classList.remove('show');
+        });
+
+        // ===========================================
+        // MOBILE NAV
+        // ===========================================
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            const isOpen = !menu.classList.contains('hidden');
+            menu.classList.toggle('hidden');
+            icon.textContent = isOpen ? 'menu' : 'close';
+        });
+    </script>
 </body>
 </html>
