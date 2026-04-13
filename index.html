@@ -284,7 +284,7 @@
         <!-- Hero Section -->
         <section class="relative flex items-center justify-center overflow-hidden" style="min-height: 520px; padding: 80px 24px 60px;">
             <div class="absolute inset-0 z-0">
-                <img id="heroArtwork" src="" alt="" class="w-full h-full object-cover" style="opacity: 0; transition: opacity 0.8s ease;">
+                <img id="heroArtwork" src="" alt="" class="w-full h-full object-cover" style="opacity: 0; transition: opacity 0.8s ease;" referrerpolicy="no-referrer">
                 <div class="absolute inset-0" style="background: linear-gradient(to bottom, transparent 0%, var(--bg-body) 100%);"></div>
             </div>
             <div class="relative z-10 text-center max-w-3xl mx-auto">
@@ -518,17 +518,17 @@
                 localStorage.setItem(cacheKey, JSON.stringify(artwork));
             }
 
-            // IIIF image URL (1686px wide for hero backgrounds)
-            const imageUrl = `https://www.artic.edu/iiif/2/${artwork.image_id}/full/1686,/0/default.jpg`;
+            // Natively load exclusively from local assets
+            const localImagePath = `assets/artworks/${artwork.image_id}.jpg`;
 
             const heroImg = document.getElementById('heroArtwork');
             heroImg.alt = artwork.alt || artwork.title;
             heroImg.onload = () => { heroImg.style.opacity = '1'; };
             heroImg.onerror = () => {
-                // Fallback to smaller size if large fails
-                heroImg.src = `https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`;
+                heroImg.onerror = null;
+                console.error('Failed to load local artwork image:', localImagePath);
             };
-            heroImg.src = imageUrl;
+            heroImg.src = localImagePath;
 
             // Set artwork credit
             const titleEl = document.getElementById('artworkTitle');
